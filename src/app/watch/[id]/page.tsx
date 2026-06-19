@@ -30,36 +30,36 @@ export default async function WatchPage({ params, searchParams }: Props) {
   const related = (movie.similar ?? []).slice(0, 12);
 
   return (
-    <div className="min-h-screen relative" style={{ background: "#000" }}>
+    <div className="min-h-screen relative" style={{ background: "#000", marginLeft: "calc(-50vw + 50%)", marginRight: "calc(-50vw + 50%)", width: "100vw" }}>
       {/* Fixed navbar spacer - accounts for fixed navbar height (66px) */}
       <div className="h-16 md:h-20" />
 
-      {/* Player wrapper - centered with proper spacing from navbar */}
-      <div className="relative z-20 my-16 md:my-24 px-6 md:px-10 lg:px-12">
+      {/* Player wrapper - full width on mobile, padded on larger screens */}
+      <div className="relative z-20 mt-4 mb-6 md:my-10 px-0 md:px-6 lg:px-10">
         <WatchPlayer movie={movie} />
       </div>
 
       {/* Info + related below the player */}
-      <div className="mt-12 md:mt-16" style={{ background: "var(--bg-primary)" }}>
-        <div className="px-6 md:px-10 py-8 space-y-4 md:space-y-6" style={{
+      <div className="mt-6 md:mt-10" style={{ background: "var(--bg-primary)" }}>
+        <div className="px-4 md:px-10 py-6 space-y-3 md:space-y-5" style={{
           borderBottom: "1px solid transparent",
           borderImage: "linear-gradient(90deg, transparent, rgba(229,9,20,0.4), transparent) 1"
         }}>
           {/* Back link */}
           <Link
             href={`/${movie.media_type === "tv" ? "tv" : "movie"}/${movie.id}`}
-            className="inline-flex items-center gap-1.5 text-xs text-[var(--text-secondary)] hover:text-white transition-colors mb-4"
+            className="inline-flex items-center gap-1.5 text-xs text-[var(--text-secondary)] hover:text-white transition-colors"
           >
             <ChevronLeft className="w-3.5 h-3.5" />
             Back to details
           </Link>
 
           {/* Title + meta */}
-          <h1 className="text-xl md:text-2xl font-black text-white leading-tight" style={{ marginBottom: "1.5rem" }}>
+          <h1 className="text-lg md:text-2xl font-black text-white leading-tight">
             {movie.title}
           </h1>
 
-          <div className="flex flex-wrap items-center gap-3 mb-4 text-xs">
+          <div className="flex flex-wrap items-center gap-3 text-xs">
             <span className="flex items-center gap-1 text-amber-400 font-semibold">
               <Star className="w-3 h-3 fill-amber-400" />
               {movie.vote_average.toFixed(1)}
@@ -82,10 +82,8 @@ export default async function WatchPage({ params, searchParams }: Props) {
         </div>
 
         {related.length > 0 && (
-          <div className="pb-28 pt-12 md:pt-20">
-            <div className="px-6 md:px-10">
-              <CarouselRow title="Up Next" movies={related} />
-            </div>
+          <div className="pb-16 pt-6 md:pt-12">
+            <CarouselRow title="Up Next" movies={related} />
           </div>
         )}
       </div>
