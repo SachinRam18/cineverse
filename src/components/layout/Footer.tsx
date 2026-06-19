@@ -1,5 +1,6 @@
 "use client";
-import { Code, Mail, Heart, Film, Home, Bookmark, Play } from "lucide-react";
+import Image from "next/image";
+import { Code, Mail, Heart, Play } from "lucide-react";
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
@@ -157,8 +158,8 @@ export function Footer() {
             {/* Brand - Takes 4 columns */}
             <div className="md:col-span-4">
               <div className="flex items-center gap-3 mb-4">
-                <div className="footer-logo-icon">
-                  <Film className="w-5 h-5" />
+                <div className="footer-logo-icon" style={{ padding: 0, overflow: "hidden", background: "transparent", border: "none", boxShadow: "none" }}>
+                  <Image src="/logo.svg" alt="CineVerse" width={40} height={40} />
                 </div>
                 <div className="footer-logo-text">Cine<span>Verse</span></div>
               </div>

@@ -19,7 +19,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Search, Home, Film, Play, Bookmark, Menu, X, Tv, Flame, Ghost, Laugh, Heart, Swords } from "lucide-react";
+import { Search, Home, Film, Bookmark, Menu, X, Tv, Flame, Ghost, Laugh, Heart, Swords } from "lucide-react";
 import { useSearchStore } from "@/store/useSearchStore";
 import { cn } from "@/lib/utils";
 import { usePathname, useSearchParams } from "next/navigation";
@@ -66,15 +66,16 @@ export function Navbar() {
         }
 
         /* Scrolled state: rich dark glass */
+        @keyframes border-pulse {
+          0%, 100% { box-shadow: 0 1px 0 0 rgba(229,9,20,0.4), 0 8px 32px -8px rgba(0,0,0,0.6); }
+          50%       { box-shadow: 0 1px 8px 0 rgba(229,9,20,1), 0 8px 32px -8px rgba(0,0,0,0.6); }
+        }
         .navbar-scrolled {
           background: rgba(10, 10, 14, 0.92);
           backdrop-filter: blur(24px) saturate(180%);
           -webkit-backdrop-filter: blur(24px) saturate(180%);
-          border-bottom: 1px solid transparent;
-          border-image: linear-gradient(90deg, transparent, rgba(229,9,20,0.35), transparent) 1;
-          box-shadow:
-            0 1px 0 0 rgba(255,255,255,0.04),
-            0 8px 32px -8px rgba(0,0,0,0.6);
+          border-bottom: 1px solid rgba(229,9,20,0.5);
+          animation: border-pulse 2.5s ease-in-out infinite;
         }
 
         /* Default: cinematic gradient fade */
@@ -94,7 +95,7 @@ export function Navbar() {
           50%       { box-shadow: 0 0 22px 6px rgba(229,9,20,0.65); }
         }
         .logo-icon {
-          background: linear-gradient(135deg, #e50914 0%, #ff4d00 100%);
+          background: #09090f;
           border-radius: 10px;
           width: 34px;
           height: 34px;
@@ -181,118 +182,66 @@ export function Navbar() {
           margin: 0 4px;
           flex-shrink: 0;
 
-        /* Search button */
-        @keyframes search-ring {
-          0%   { transform: rotate(0deg); }
-          100% { transform: rotate(360deg); }
-        }
+        /* ── Search button ── */
         .search-btn {
           display: flex;
           align-items: center;
           justify-content: center;
-          width: 38px;
-          height: 38px;
-          border-radius: 50%;
-          background: rgba(10,10,14,0.8);
+          width: 36px;
+          height: 36px;
+          border-radius: 10px;
+          background: linear-gradient(135deg, #e50914, #ff4d00);
           border: none;
           cursor: pointer;
-          transition: all 0.25s ease;
-          position: relative;
+          transition: all 0.22s ease;
           flex-shrink: 0;
-          backdrop-filter: blur(12px);
+          box-shadow: 0 2px 12px rgba(229,9,20,0.45);
         }
-        .search-btn::before {
-          content: '';
-          position: absolute;
-          inset: -1.5px;
-          border-radius: 50%;
-          padding: 1.5px;
-          background: conic-gradient(from 0deg, #e50914, #ff4d00, #ff8c00, #e50914);
-          -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-          -webkit-mask-composite: xor;
-          mask-composite: exclude;
-          transition: opacity 0.25s ease;
-          opacity: 0.7;
-        }
-        .search-btn::after {
-          content: '';
-          position: absolute;
-          inset: -1.5px;
-          border-radius: 50%;
-          padding: 1.5px;
-          background: conic-gradient(from 0deg, #e50914, #ff4d00, #ff8c00, #e50914);
-          -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-          -webkit-mask-composite: xor;
-          mask-composite: exclude;
-          animation: search-ring 2.5s linear infinite;
-          opacity: 0;
-          transition: opacity 0.25s ease;
-        }
-        .search-btn:hover::before { opacity: 0; }
-        .search-btn:hover::after  { opacity: 1; }
         .search-btn:hover {
-          background: rgba(229,9,20,0.12);
-          box-shadow: 0 0 18px rgba(229,9,20,0.35), 0 0 6px rgba(229,9,20,0.2) inset;
-          transform: scale(1.08);
+          transform: translateY(-2px) scale(1.08);
+          box-shadow: 0 6px 20px rgba(229,9,20,0.65);
         }
         .search-btn svg {
-          color: #ff4d00;
-          position: relative;
-          z-index: 1;
-          filter: drop-shadow(0 0 5px rgba(229,9,20,0.6));
+          color: #fff;
           transition: transform 0.2s ease;
         }
-        .search-btn:hover svg { transform: scale(1.15); }
+        .search-btn:hover svg { transform: scale(1.15) rotate(-8deg); }
 
-        /* Avatar */
-        @keyframes avatar-ring {
-          0%   { transform: rotate(0deg); }
-          100% { transform: rotate(360deg); }
-        }
+        /* ── Avatar ── */
         .avatar-wrap {
           position: relative;
-          width: 38px;
-          height: 38px;
+          width: 36px;
+          height: 36px;
           flex-shrink: 0;
           cursor: pointer;
-        }
-        .avatar-ring {
-          position: absolute;
-          inset: -1.5px;
           border-radius: 50%;
-          padding: 1.5px;
-          background: conic-gradient(from 0deg, #e50914, #ff4d00, #ff8c00, #ffcc00, #e50914);
-          -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-          -webkit-mask-composite: xor;
-          mask-composite: exclude;
-          animation: avatar-ring 3s linear infinite;
-          opacity: 0.85;
-          transition: opacity 0.25s ease;
+          padding: 2px;
+          background: linear-gradient(135deg, #e50914, #ff8c00, #e50914);
+          background-size: 200% 200%;
+          animation: avatar-gradient 3s ease infinite;
+          box-shadow: 0 2px 12px rgba(229,9,20,0.4);
+          transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
-        .avatar-wrap:hover .avatar-ring { opacity: 1; }
-        .avatar {
-          width: 38px;
-          height: 38px;
+        @keyframes avatar-gradient {
+          0%   { background-position: 0% 50%; }
+          50%  { background-position: 100% 50%; }
+          100% { background-position: 0% 50%; }
+        }
+        .avatar-wrap:hover {
+          transform: scale(1.08);
+          box-shadow: 0 4px 20px rgba(229,9,20,0.65);
+        }
+        .avatar-inner {
+          width: 100%;
+          height: 100%;
           border-radius: 50%;
-          background: linear-gradient(135deg, #1a0a0a 0%, #2a0d0d 50%, #1a0808 100%);
+          background: #0e0505;
           display: flex;
           align-items: center;
           justify-content: center;
-          color: #ff4d00;
-          font-size: 0.85rem;
+          color: #fff;
+          font-size: 0.82rem;
           font-weight: 900;
-          cursor: pointer;
-          flex-shrink: 0;
-          letter-spacing: 0.02em;
-          position: relative;
-          z-index: 1;
-          transition: all 0.2s ease;
-          text-shadow: 0 0 8px rgba(229,9,20,0.7);
-        }
-        .avatar-wrap:hover .avatar {
-          background: linear-gradient(135deg, #2a0d0d 0%, #3d1010 50%, #2a0808 100%);
-          transform: scale(1.05);
-          color: #ff6030;
         }
 
         /* Mobile menu */
@@ -387,8 +336,8 @@ export function Navbar() {
 
           {/* ── Logo ── */}
           <Link href="/" className="flex items-center gap-2.5 flex-shrink-0" style={{ marginLeft: "2rem" }}>
-            <div className="logo-icon">
-              <Play size={16} color="#fff" fill="#fff" />
+            <div className="logo-icon" style={{ overflow: "hidden", padding: 0 }}>
+              <Image src="/logo.svg" alt="CineVerse" width={34} height={34} priority />
             </div>
             <span className="logo-text hidden sm:block">
               Cine<span>Verse</span>
@@ -440,17 +389,68 @@ export function Navbar() {
             {/* Search */}
             <button
               onClick={openModal}
-              className="search-btn"
               aria-label="Search"
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                width: "34px",
+                height: "34px",
+                borderRadius: "10px",
+                background: "linear-gradient(135deg, #e50914, #ff4d00)",
+                border: "none",
+                cursor: "pointer",
+                flexShrink: 0,
+                boxShadow: "0 2px 14px rgba(229,9,20,0.55)",
+                transition: "all 0.2s ease",
+              }}
+              onMouseEnter={e => {
+                (e.currentTarget as HTMLButtonElement).style.transform = "translateY(-2px) scale(1.1)";
+                (e.currentTarget as HTMLButtonElement).style.boxShadow = "0 6px 22px rgba(229,9,20,0.75)";
+              }}
+              onMouseLeave={e => {
+                (e.currentTarget as HTMLButtonElement).style.transform = "";
+                (e.currentTarget as HTMLButtonElement).style.boxShadow = "0 2px 14px rgba(229,9,20,0.55)";
+              }}
             >
-              <Search size={14} />
+              <Search size={15} color="#fff" />
             </button>
 
             {/* Avatar */}
             <Link href="/profile">
-              <div className="avatar-wrap">
-                <div className="avatar-ring" />
-                <div className="avatar">U</div>
+              <div
+                style={{
+                  width: "34px",
+                  height: "34px",
+                  borderRadius: "50%",
+                  padding: "2px",
+                  background: "linear-gradient(135deg, #e50914 0%, #ff8c00 50%, #e50914 100%)",
+                  boxShadow: "0 2px 14px rgba(229,9,20,0.5)",
+                  cursor: "pointer",
+                  transition: "all 0.2s ease",
+                  flexShrink: 0,
+                }}
+                onMouseEnter={e => {
+                  (e.currentTarget as HTMLDivElement).style.transform = "scale(1.1)";
+                  (e.currentTarget as HTMLDivElement).style.boxShadow = "0 4px 22px rgba(229,9,20,0.75)";
+                }}
+                onMouseLeave={e => {
+                  (e.currentTarget as HTMLDivElement).style.transform = "";
+                  (e.currentTarget as HTMLDivElement).style.boxShadow = "0 2px 14px rgba(229,9,20,0.5)";
+                }}
+              >
+                <div style={{
+                  width: "100%",
+                  height: "100%",
+                  borderRadius: "50%",
+                  background: "#120404",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  color: "#fff",
+                  fontSize: "0.8rem",
+                  fontWeight: 900,
+                }}>U</div>
               </div>
             </Link>
 

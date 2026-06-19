@@ -1,0 +1,47 @@
+<svg width="500" height="500" viewBox="0 0 500 500" role="img" xmlns="http://www.w3.org/2000/svg">
+  <title>CineVerse logo icon</title>
+  <desc>CineVerse streaming platform icon</desc>
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#020818"/>
+      <stop offset="100%" stop-color="#010510"/>
+    </linearGradient>
+    <radialGradient id="warmGlow" cx="50%" cy="50%" r="48%">
+      <stop offset="0%"   stop-color="#e50914" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#010510" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="cGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%"   stop-color="#e50914"/>
+      <stop offset="40%"  stop-color="#ff4d00"/>
+      <stop offset="75%"  stop-color="#ff6030"/>
+      <stop offset="100%" stop-color="#ff8c00"/>
+    </linearGradient>
+    <linearGradient id="borderGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%"   stop-color="#e50914" stop-opacity="0.9"/>
+      <stop offset="50%"  stop-color="#ff4d00" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#e50914" stop-opacity="0.2"/>
+    </linearGradient>
+    <linearGradient id="nRed" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%"   stop-color="#e50914"/>
+      <stop offset="100%" stop-color="#ff4d00"/>
+    </linearGradient>
+    <linearGradient id="nFade" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%"   stop-color="#ff4d00"/>
+      <stop offset="100%" stop-color="#e50914"/>
+    </linearGradient>
+    <clipPath id="iconClip">
+      <rect x="30" y="30" width="440" height="440" rx="88"/>
+    </clipPath>
+  </defs>
+
+  <rect x="30" y="30" width="440" height="440" rx="88" fill="url(#bgGrad)"/>
+  <rect x="30" y="30" width="440" height="440" rx="88" fill="url(#warmGlow)" clip-path="url(#iconClip)"/>
+
+  <!-- C arc - larger, centered at 250,250, outer r=185, inner r=110 -->
+  <path d="M 414,155 A 185,185 0 1,0 414,345 L 360,308 A 110,110 0 1,1 360,192 Z" fill="url(#cGrad)"/>
+
+  <!-- Play triangle - scaled up, shifted right to sit inside C opening -->
+  <polygon points="215,170 215,330 370,250" fill="white" opacity="0.97"/>
+
+  <rect x="30" y="30" width="440" height="440" rx="88" fill="none" stroke="#e50914" stroke-width="6" opacity="0.9"/>
+</svg>
