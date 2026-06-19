@@ -84,7 +84,7 @@ export function HeroBanner({ movies }: HeroBannerProps) {
       <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-transparent" />
 
       {/* Content — capped at max-w-2xl so it never bleeds into the right edge */}
-      <div className="absolute inset-0 flex flex-col justify-end pb-2 md:pb-3 px-6 md:px-16 lg:px-24">
+      <div className="absolute inset-0 flex flex-col justify-end pb-2 md:pb-3 px-6 md:px-16 lg:px-24 z-10">
         <div className="max-w-2xl">
           <AnimatePresence mode="wait">
             <motion.div
