@@ -182,100 +182,117 @@ export function Navbar() {
           flex-shrink: 0;
 
         /* Search button */
+        @keyframes search-ring {
+          0%   { transform: rotate(0deg); }
+          100% { transform: rotate(360deg); }
+        }
         .search-btn {
           display: flex;
           align-items: center;
           justify-content: center;
-          width: 36px;
-          height: 36px;
-          border-radius: 10px;
-          background: linear-gradient(135deg, rgba(229,9,20,0.15) 0%, rgba(255,77,0,0.1) 100%);
-          border: 1px solid rgba(229,9,20,0.4);
+          width: 38px;
+          height: 38px;
+          border-radius: 50%;
+          background: rgba(10,10,14,0.8);
+          border: none;
           cursor: pointer;
           transition: all 0.25s ease;
           position: relative;
-          overflow: hidden;
           flex-shrink: 0;
+          backdrop-filter: blur(12px);
+        }
+        .search-btn::before {
+          content: '';
+          position: absolute;
+          inset: -1.5px;
+          border-radius: 50%;
+          padding: 1.5px;
+          background: conic-gradient(from 0deg, #e50914, #ff4d00, #ff8c00, #e50914);
+          -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+          -webkit-mask-composite: xor;
+          mask-composite: exclude;
+          transition: opacity 0.25s ease;
+          opacity: 0.7;
         }
         .search-btn::after {
           content: '';
           position: absolute;
-          inset: 0;
-          background: linear-gradient(135deg, rgba(229,9,20,0.25), rgba(255,77,0,0.18));
+          inset: -1.5px;
+          border-radius: 50%;
+          padding: 1.5px;
+          background: conic-gradient(from 0deg, #e50914, #ff4d00, #ff8c00, #e50914);
+          -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+          -webkit-mask-composite: xor;
+          mask-composite: exclude;
+          animation: search-ring 2.5s linear infinite;
           opacity: 0;
           transition: opacity 0.25s ease;
         }
-        .search-btn:hover::after { opacity: 1; }
+        .search-btn:hover::before { opacity: 0; }
+        .search-btn:hover::after  { opacity: 1; }
         .search-btn:hover {
-          border-color: rgba(229,9,20,0.75);
-          box-shadow: 0 0 14px rgba(229,9,20,0.3), inset 0 0 8px rgba(229,9,20,0.08);
-          transform: translateY(-1px);
+          background: rgba(229,9,20,0.12);
+          box-shadow: 0 0 18px rgba(229,9,20,0.35), 0 0 6px rgba(229,9,20,0.2) inset;
+          transform: scale(1.08);
         }
         .search-btn svg {
-          color: #e50914;
+          color: #ff4d00;
           position: relative;
           z-index: 1;
-          filter: drop-shadow(0 0 4px rgba(229,9,20,0.5));
+          filter: drop-shadow(0 0 5px rgba(229,9,20,0.6));
+          transition: transform 0.2s ease;
         }
-
-        /* Icon buttons */
-        .icon-btn {
-          position: relative;
-          width: 36px;
-          height: 36px;
-          border-radius: 10px;
-          background: rgba(255,255,255,0.07);
-          border: 1px solid rgba(255,255,255,0.09);
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          color: rgba(255,255,255,0.55);
-          cursor: pointer;
-          transition: all 0.2s ease;
-          flex-shrink: 0;
-        }
-        .icon-btn:hover {
-          background: rgba(255,255,255,0.12);
-          border-color: rgba(255,255,255,0.18);
-          color: #fff;
-          transform: translateY(-1px);
-        }
-
-        /* Notification dot */
-        .notif-dot {
-          position: absolute;
-          top: 7px;
-          right: 7px;
-          width: 6px;
-          height: 6px;
-          background: #e50914;
-          border-radius: 50%;
-          border: 1.5px solid rgba(10, 10, 14, 0.85);
-        }
+        .search-btn:hover svg { transform: scale(1.15); }
 
         /* Avatar */
+        @keyframes avatar-ring {
+          0%   { transform: rotate(0deg); }
+          100% { transform: rotate(360deg); }
+        }
+        .avatar-wrap {
+          position: relative;
+          width: 38px;
+          height: 38px;
+          flex-shrink: 0;
+          cursor: pointer;
+        }
+        .avatar-ring {
+          position: absolute;
+          inset: -1.5px;
+          border-radius: 50%;
+          padding: 1.5px;
+          background: conic-gradient(from 0deg, #e50914, #ff4d00, #ff8c00, #ffcc00, #e50914);
+          -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+          -webkit-mask-composite: xor;
+          mask-composite: exclude;
+          animation: avatar-ring 3s linear infinite;
+          opacity: 0.85;
+          transition: opacity 0.25s ease;
+        }
+        .avatar-wrap:hover .avatar-ring { opacity: 1; }
         .avatar {
-          width: 36px;
-          height: 36px;
-          border-radius: 10px;
-          background: linear-gradient(135deg, #e50914 0%, #ff4d00 100%);
+          width: 38px;
+          height: 38px;
+          border-radius: 50%;
+          background: linear-gradient(135deg, #1a0a0a 0%, #2a0d0d 50%, #1a0808 100%);
           display: flex;
           align-items: center;
           justify-content: center;
-          color: #fff;
-          font-size: 0.8rem;
-          font-weight: 800;
-          border: 1px solid rgba(229,9,20,0.4);
-          box-shadow: 0 0 10px rgba(229,9,20,0.25);
-          transition: all 0.2s ease;
+          color: #ff4d00;
+          font-size: 0.85rem;
+          font-weight: 900;
           cursor: pointer;
           flex-shrink: 0;
           letter-spacing: 0.02em;
+          position: relative;
+          z-index: 1;
+          transition: all 0.2s ease;
+          text-shadow: 0 0 8px rgba(229,9,20,0.7);
         }
-        .avatar:hover {
-          border-color: rgba(229,9,20,0.8);
-          box-shadow: 0 0 18px rgba(229,9,20,0.45);
-          transform: translateY(-1px) scale(1.05);
+        .avatar-wrap:hover .avatar {
+          background: linear-gradient(135deg, #2a0d0d 0%, #3d1010 50%, #2a0808 100%);
+          transform: scale(1.05);
+          color: #ff6030;
         }
 
         /* Mobile menu */
@@ -431,7 +448,10 @@ export function Navbar() {
 
             {/* Avatar */}
             <Link href="/profile">
-              <div className="avatar">U</div>
+              <div className="avatar-wrap">
+                <div className="avatar-ring" />
+                <div className="avatar">U</div>
+              </div>
             </Link>
 
             {/* Mobile hamburger */}
