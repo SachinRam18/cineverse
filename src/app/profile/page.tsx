@@ -7,7 +7,7 @@ import {
 } from "lucide-react";
 import { useProfileStore } from "@/store/useProfileStore";
 import { useWatchlistStore } from "@/store/useWatchlistStore";
-import { MOCK_MOVIES, MOCK_TV_SHOWS, GENRES, getBackdropUrl, getPosterUrl } from "@/lib/mock-data";
+import { GENRES, getBackdropUrl, getPosterUrl } from "@/lib/mock-data";
 import { MovieCard } from "@/components/movie/MovieCard";
 import { Movie } from "@/types/movie";
 import Link from "next/link";
@@ -63,37 +63,22 @@ export default function ProfilePage() {
 
   useEffect(() => {
     if (mounted) {
-      const stored = localStorage.getItem("cineverse_continue_watching");
-      if (stored) {
-        try {
-          const parsed = JSON.parse(stored);
-          if (Array.isArray(parsed) && parsed.length > 0) {
-            const items = parsed.map((item: any) => {
-              const movie =
-                item.mediaType === "tv"
-                  ? MOCK_TV_SHOWS.find((m) => m.id === item.movieId)
-                  : item.episode
-                    ? MOCK_TV_SHOWS.find((m) => m.id === item.movieId) ?? MOCK_MOVIES.find((m) => m.id === item.movieId)
-                  : MOCK_MOVIES.find((m) => m.id === item.movieId) ?? MOCK_TV_SHOWS.find((m) => m.id === item.movieId);
-              return {
-                movie: movie || { id: item.movieId, title: `Movie ${item.movieId}`, backdrop_path: null, genres: [] },
-                progress: Math.round(item.progress),
-                label: item.episode ? `Episode ${item.episode}` : null,
-              };
-            }).filter(item => item.movie !== null);
-            setContinueWatchingItems(items);
-            return;
-          }
-        } catch (e) {
-          console.error(e);
-        }
+      try {
+        const stored = localStorage.getItem("cineverse_continue_watching");
+        if (!stored) return;
+        const parsed = JSON.parse(stored);
+        if (!Array.isArray(parsed) || parsed.length === 0) return;
+        const items = parsed
+          .filter((item: any) => item.movieData)
+          .map((item: any) => ({
+            movie: item.movieData,
+            progress: Math.round(item.progress ?? 0),
+            label: item.episode ? `Episode ${item.episode}` : null,
+          }));
+        setContinueWatchingItems(items);
+      } catch (e) {
+        console.error(e);
       }
-      const defaultItems = MOCK_MOVIES.slice(8, 12).map((m, i) => ({
-        movie: m,
-        progress: [65, 30, 85, 12][i],
-        label: null as string | null,
-      }));
-      setContinueWatchingItems(defaultItems);
     }
   }, [mounted]);
 

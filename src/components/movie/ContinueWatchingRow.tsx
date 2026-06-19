@@ -1,11 +1,9 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
-import { ChevronLeft, ChevronRight, ArrowRight } from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { motion } from "framer-motion";
 import { Movie } from "@/types/movie";
 import { MovieCard } from "./MovieCard";
-import { SkeletonCard } from "@/components/common/SkeletonCard";
-import { MOCK_MOVIES } from "@/lib/mock-data";
 import { cn } from "@/lib/utils";
 
 interface ContinueWatchingRowProps {
@@ -25,37 +23,26 @@ export function ContinueWatchingRow({ title, cardSize = "lg", className }: Conti
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const stored = localStorage.getItem("cineverse_continue_watching");
-    if (stored) {
-      try {
-        const parsed = JSON.parse(stored);
-        if (Array.isArray(parsed) && parsed.length > 0) {
-          const loaded = parsed
-            .map((item: any) => {
-              const movie = MOCK_MOVIES.find((m) => m.id === item.movieId);
-              if (!movie) return null;
-              return {
-                movie,
-                progress: Math.round(item.progress),
-              };
-            })
-            .filter((item): item is ContinueWatchingMovieItem => item !== null);
-          setItems(loaded);
-          setIsLoading(false);
-          return;
-        }
-      } catch (e) {
-        console.error(e);
-      }
-    }
+    try {
+      const stored = localStorage.getItem("cineverse_continue_watching");
+      if (!stored) { setIsLoading(false); return; }
 
-    // Default fallback mock continue watching items if user has never watched anything
-    const defaultItems = MOCK_MOVIES.slice(4, 8).map((m, i) => ({
-      movie: m,
-      progress: [65, 30, 85, 12][i] || 45,
-    }));
-    setItems(defaultItems);
-    setIsLoading(false);
+      const parsed = JSON.parse(stored);
+      if (!Array.isArray(parsed) || parsed.length === 0) { setIsLoading(false); return; }
+
+      const loaded: ContinueWatchingMovieItem[] = parsed
+        .filter((item: any) => item.movieData)
+        .map((item: any) => ({
+          movie: item.movieData as Movie,
+          progress: Math.round(item.progress ?? 0),
+        }));
+
+      setItems(loaded);
+    } catch (e) {
+      console.error(e);
+    } finally {
+      setIsLoading(false);
+    }
   }, []);
 
   const scroll = (dir: "left" | "right") => {
@@ -64,14 +51,13 @@ export function ContinueWatchingRow({ title, cardSize = "lg", className }: Conti
     scrollRef.current.scrollBy({ left: dir === "right" ? amount : -amount, behavior: "smooth" });
   };
 
-  if (items.length === 0 && !isLoading) return null;
+  if (!isLoading && items.length === 0) return null;
 
   return (
-    <section className={cn("py-5 group/row", className)}>
-      {/* Header row */}
-      <div className="flex items-center justify-between px-6 md:px-12 mb-4 gap-4">
+    <section className={cn("pt-0 pb-5 group/row", className)}>
+      <div className="flex items-center justify-between px-6 md:px-10 mb-3 gap-4">
         <motion.h2
-          className="text-base md:text-lg font-bold text-white tracking-tight line-clamp-1 flex-1"
+          className="text-2xl md:text-3xl font-bold text-white tracking-tight line-clamp-1 flex-1"
           initial={{ opacity: 0, x: -10 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
@@ -79,37 +65,21 @@ export function ContinueWatchingRow({ title, cardSize = "lg", className }: Conti
         >
           {title}
         </motion.h2>
-
-        <div className="flex items-center gap-3 flex-shrink-0">
-          <span className="text-[var(--accent-red)] text-xs font-semibold uppercase tracking-widest flex items-center gap-1 opacity-0 group-hover/row:opacity-100 transition-opacity cursor-pointer select-none">
-            See all <ArrowRight className="w-3 h-3" />
-          </span>
-
-          <div className="flex gap-1.5 opacity-0 group-hover/row:opacity-100 transition-opacity">
-            <button
-              onClick={() => scroll("left")}
-              className="w-7 h-7 rounded-full glass glass-hover flex items-center justify-center text-white/80 hover:text-white transition-all border border-white/10"
-              aria-label="Scroll left"
-            >
-              <ChevronLeft className="w-3.5 h-3.5" />
-            </button>
-            <button
-              onClick={() => scroll("right")}
-              className="w-7 h-7 rounded-full glass glass-hover flex items-center justify-center text-white/80 hover:text-white transition-all border border-white/10"
-              aria-label="Scroll right"
-            >
-              <ChevronRight className="w-3.5 h-3.5" />
-            </button>
-          </div>
+        <div className="flex gap-1.5 opacity-0 group-hover/row:opacity-100 transition-opacity">
+          <button onClick={() => scroll("left")} className="w-7 h-7 rounded-full glass glass-hover flex items-center justify-center text-white/80 hover:text-white transition-all border border-white/10" aria-label="Scroll left">
+            <ChevronLeft className="w-3.5 h-3.5" />
+          </button>
+          <button onClick={() => scroll("right")} className="w-7 h-7 rounded-full glass glass-hover flex items-center justify-center text-white/80 hover:text-white transition-all border border-white/10" aria-label="Scroll right">
+            <ChevronRight className="w-3.5 h-3.5" />
+          </button>
         </div>
       </div>
 
-      <div
-        ref={scrollRef}
-        className="flex gap-3 px-6 md:px-12 overflow-x-auto carousel-scroll pb-3"
-      >
+      <div ref={scrollRef} className="flex gap-3 px-6 md:px-10 overflow-x-auto carousel-scroll pb-3">
         {isLoading
-          ? Array.from({ length: 4 }).map((_, i) => <SkeletonCard key={i} />)
+          ? Array.from({ length: 4 }).map((_, i) => (
+              <div key={i} className="flex-shrink-0 w-48 md:w-56 lg:w-64 aspect-[2/3] rounded-[14px] skeleton" />
+            ))
           : items.map(({ movie, progress }, i) => (
               <MovieCard key={movie.id} movie={movie} index={i} size={cardSize} progress={progress} />
             ))}

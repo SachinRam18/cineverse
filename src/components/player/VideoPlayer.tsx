@@ -86,7 +86,8 @@ export function VideoPlayer({ movie, season, episode }: VideoPlayerProps) {
             const items: ContinueWatchingItem[] = JSON.parse(localStorage.getItem(key) || "[]");
             localStorage.setItem(key, JSON.stringify([
               { movieId: movie.id, mediaType, progress: pct, timestamp: ts || 0,
-                duration: dur || 0, episode: currentEpisode, watchedAt: new Date().toISOString() },
+                duration: dur || 0, episode: currentEpisode, watchedAt: new Date().toISOString(),
+                movieData: movie },
               ...items.filter(i => i.movieId !== movie.id || i.mediaType !== mediaType),
             ].slice(0, 8)));
           }
