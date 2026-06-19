@@ -31,7 +31,7 @@ export const useProfileStore = create<ProfileState>()(
       streamQuality: "1080p",
       autoplayNext: true,
       audioLanguage: "English (Original)",
-      planTier: "CineVerse Premium 4K + HDR",
+      planTier: "CineVerses Premium 4K + HDR",
       favoriteIds: [693134, 157336, 27205, 569094], // Dune, Interstellar, Inception, Spider-Verse default favorites
 
       setUsername: (username) => set({ username }),

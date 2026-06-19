@@ -41,20 +41,17 @@ export function Footer() {
         }
 
         .footer-logo-icon {
-          background: linear-gradient(135deg, #e50914 0%, #ff4d00 100%);
+          background: transparent;
           border-radius: 10px;
-          width: 40px;
-          height: 40px;
+          width: 68px;
+          height: 68px;
           display: flex;
           align-items: center;
           justify-content: center;
-          color: white;
-          box-shadow: 0 0 20px rgba(229, 9, 20, 0.3);
           transition: all 0.3s ease;
         }
         .footer-logo-icon:hover {
-          transform: scale(1.1) rotate(3deg);
-          box-shadow: 0 0 28px rgba(229, 9, 20, 0.5);
+          transform: scale(1.1);
         }
 
         .footer-logo-text {
@@ -159,9 +156,9 @@ export function Footer() {
             <div className="md:col-span-4">
               <div className="flex items-center gap-3 mb-4">
                 <div className="footer-logo-icon" style={{ padding: 0, overflow: "hidden", background: "transparent", border: "none", boxShadow: "none" }}>
-                  <Image src="/logo.svg" alt="CineVerse" width={40} height={40} />
+                  <Image src="/logo.svg" alt="CineVerse" width={68} height={68} />
                 </div>
-                <div className="footer-logo-text">Cine<span>Verse</span></div>
+                <div className="footer-logo-text">Cine<span>Verses</span></div>
               </div>
               <p style={{ fontSize: "0.8125rem", color: "rgba(255,255,255,0.55)", lineHeight: 1.6, marginTop: "0.75rem" }}>
                 Premium movie and TV show streaming experience. Discover cinematic entertainment in stunning quality.

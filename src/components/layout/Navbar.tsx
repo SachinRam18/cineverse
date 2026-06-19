@@ -89,20 +89,14 @@ export function Navbar() {
           border-bottom: 1px solid transparent;
         }
 
-        /* Logo glow pulse */
-        @keyframes glow-pulse {
-          0%, 100% { box-shadow: 0 0 12px 2px rgba(229,9,20,0.45); }
-          50%       { box-shadow: 0 0 22px 6px rgba(229,9,20,0.65); }
-        }
         .logo-icon {
-          background: #09090f;
+          background: transparent;
           border-radius: 10px;
-          width: 34px;
-          height: 34px;
+          width: 56px;
+          height: 56px;
           display: flex;
           align-items: center;
           justify-content: center;
-          animation: glow-pulse 3.5s ease-in-out infinite;
           transition: transform 0.2s ease;
         }
         .logo-icon:hover { transform: scale(1.08); }
@@ -337,10 +331,10 @@ export function Navbar() {
           {/* ── Logo ── */}
           <Link href="/" className="flex items-center gap-2.5 flex-shrink-0" style={{ marginLeft: "2rem" }}>
             <div className="logo-icon" style={{ overflow: "hidden", padding: 0 }}>
-              <Image src="/logo.svg" alt="CineVerse" width={34} height={34} priority />
+              <Image src="/logo.svg" alt="CineVerse" width={56} height={56} priority />
             </div>
             <span className="logo-text hidden sm:block">
-              Cine<span>Verse</span>
+              Cine<span>Verses</span>
             </span>
           </Link>
 

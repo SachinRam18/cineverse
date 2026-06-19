@@ -7,13 +7,19 @@ import { SearchModal } from "@/components/search/SearchModal";
 import { QueryProvider } from "@/components/providers/QueryProvider";
 
 export const metadata: Metadata = {
-  title: "CineVerse — Premium Movie Streaming",
-  description: "Discover and stream thousands of movies and TV shows in stunning 4K. CineVerse is your premium destination for cinematic entertainment.",
+  title: "CineVerses",
+  description: "Discover and stream thousands of movies and TV shows in stunning 4K. CineVerses is your premium destination for cinematic entertainment.",
   keywords: ["movies", "streaming", "cinema", "4K", "tv shows", "watch online"],
+  icons: {
+    icon: "/logo.svg",
+    shortcut: "/logo.svg",
+    apple: "/logo.svg",
+  },
   openGraph: {
-    title: "CineVerse — Premium Movie Streaming",
+    title: "CineVerses",
     description: "Your premium destination for cinematic entertainment.",
     type: "website",
+    images: ["/logo.svg"],
   },
 };
 
