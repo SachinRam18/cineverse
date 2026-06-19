@@ -1,0 +1,43 @@
+import type { Metadata } from "next";
+import { Suspense } from "react";
+import "./globals.css";
+import { Navbar } from "@/components/layout/Navbar";
+import { Footer } from "@/components/layout/Footer";
+import { SearchModal } from "@/components/search/SearchModal";
+import { QueryProvider } from "@/components/providers/QueryProvider";
+
+export const metadata: Metadata = {
+  title: "CineVerse — Premium Movie Streaming",
+  description: "Discover and stream thousands of movies and TV shows in stunning 4K. CineVerse is your premium destination for cinematic entertainment.",
+  keywords: ["movies", "streaming", "cinema", "4K", "tv shows", "watch online"],
+  openGraph: {
+    title: "CineVerse — Premium Movie Streaming",
+    description: "Your premium destination for cinematic entertainment.",
+    type: "website",
+  },
+};
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@300;400;500;600;700;800;900&display=swap"
+          rel="stylesheet"
+        />
+      </head>
+      <body suppressHydrationWarning>
+        <QueryProvider>
+          <Suspense fallback={null}>
+            <Navbar />
+            <SearchModal />
+            <main className="pt-[76px]" style={{ paddingBottom: "2rem" }}>{children}</main>
+            <Footer />
+          </Suspense>
+        </QueryProvider>
+      </body>
+    </html>
+  );
+}
