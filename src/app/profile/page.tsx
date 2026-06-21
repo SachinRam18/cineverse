@@ -7,7 +7,7 @@ import {
 } from "lucide-react";
 import { useProfileStore } from "@/store/useProfileStore";
 import { useWatchlistStore } from "@/store/useWatchlistStore";
-import { GENRES, getBackdropUrl, getPosterUrl } from "@/lib/mock-data";
+import { MOCK_MOVIES, GENRES, getBackdropUrl, getPosterUrl } from "@/lib/mock-data";
 import { MovieCard } from "@/components/movie/MovieCard";
 import { Movie } from "@/types/movie";
 import Link from "next/link";
