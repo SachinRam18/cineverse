@@ -27,7 +27,7 @@ async function tmdbFetch<T>(endpoint: string): Promise<T | null> {
 
   try {
     const res = await fetch(url, {
-      next: { revalidate: 3600 },
+      next: { revalidate: 300 },
     });
     if (!res.ok) return null;
     return res.json();

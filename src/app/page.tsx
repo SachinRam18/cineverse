@@ -1,15 +1,4 @@
-/**
- * HOME PAGE
- * 
- * Main landing page displaying:
- * - Hero Banner with trending movies carousel
- * - Continue Watching Row (resume watching movies)
- * - Trending Now movies
- * - Top Rated, New Releases
- * - Genre-based carousels (Action, Sci-Fi, Thriller, TV Shows)
- * 
- * Layout: Hero banner spans full viewport, content rows below with negative overlap
- */
+export const dynamic = "force-dynamic";
 import { fetchTrending, fetchTrendingTv, fetchTopRated, fetchNewReleases, fetchByGenre } from "@/lib/tmdb";
 import { HeroBanner } from "@/components/movie/HeroBanner";
 import { CarouselRow } from "@/components/movie/CarouselRow";
