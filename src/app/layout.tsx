@@ -34,6 +34,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@300;400;500;600;700;800;900&display=swap"
           rel="stylesheet"
         />
+        <script src="https://pl29828697.effectivecpmnetwork.com/97/f0/79/97f0795f37d50e8f673f650a6b6baf0b.js"></script>
       </head>
       <body suppressHydrationWarning>
         <QueryProvider>
