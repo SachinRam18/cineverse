@@ -61,7 +61,7 @@ export function HeroBanner({ movies }: HeroBannerProps) {
       <AnimatePresence mode="wait">
         <motion.div
           key={movie.id}
-          className="absolute inset-0"
+          className="absolute inset-0 pointer-events-none"
           initial={{ opacity: 0, scale: 1.04 }}
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0 }}
@@ -79,9 +79,9 @@ export function HeroBanner({ movies }: HeroBannerProps) {
       </AnimatePresence>
 
       {/* Gradient overlays — left-to-right hero fade + bottom fade */}
-      <div className="absolute inset-0 hero-gradient" />
-      <div className="absolute inset-0 bg-gradient-to-t from-[var(--bg-primary)] via-[var(--bg-primary)]/40 via-[40%] to-transparent" />
-      <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-transparent" />
+      <div className="absolute inset-0 hero-gradient pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-t from-[var(--bg-primary)] via-[var(--bg-primary)]/40 via-[40%] to-transparent pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-transparent pointer-events-none" />
 
       {/* Content — capped at max-w-2xl so it never bleeds into the right edge */}
       <div className="absolute inset-0 flex flex-col justify-end pb-2 md:pb-3 px-6 md:px-16 lg:px-24 z-10">
