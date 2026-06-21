@@ -5,6 +5,7 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { SearchModal } from "@/components/search/SearchModal";
 import { QueryProvider } from "@/components/providers/QueryProvider";
+import { BannerAd } from "@/components/common/BannerAd";
 
 export const metadata: Metadata = {
   title: "CineVerses",
@@ -43,6 +44,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <Navbar />
             <SearchModal />
             <main className="pt-[76px]" style={{ paddingBottom: "2rem" }}>{children}</main>
+            <BannerAd />
             <Footer />
           </Suspense>
         </QueryProvider>
