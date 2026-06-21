@@ -207,6 +207,16 @@ export function Footer() {
             </div>
           </div>
 
+          {/* Banner Ad 468x60 */}
+          <div style={{ display: "flex", justifyContent: "center", margin: "1.5rem 0" }}>
+            <script
+              dangerouslySetInnerHTML={{
+                __html: `atOptions = { 'key': 'f554e598a28bfb9b891f7f05cf318e3a', 'format': 'iframe', 'height': 60, 'width': 468, 'params': {} };`
+              }}
+            />
+            <script src="//www.highperformanceformat.com/f554e598a28bfb9b891f7f05cf318e3a/invoke.js" />
+          </div>
+
           {/* Divider */}
           <div className="footer-divider" />
         </div>
