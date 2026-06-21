@@ -37,6 +37,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <script src="https://pl29828697.effectivecpmnetwork.com/97/f0/79/97f0795f37d50e8f673f650a6b6baf0b.js"></script>
       </head>
       <body suppressHydrationWarning>
+        <a href="https://www.effectivecpmnetwork.com/fg4z75ky?key=17cd319389fd490c67f3ea9b4512385d" style={{ display: "none" }} aria-hidden="true" />
         <QueryProvider>
           <Suspense fallback={null}>
             <Navbar />
