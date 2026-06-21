@@ -23,7 +23,7 @@ export default async function WatchPage({ params, searchParams }: Props) {
       ? await fetchTvDetails(mediaId)
       : mediaType === "movie"
         ? await fetchMovieDetails(mediaId)
-        : (await fetchTvDetails(mediaId)) ?? (await fetchMovieDetails(mediaId));
+        : (await fetchMovieDetails(mediaId)) ?? (await fetchTvDetails(mediaId));
 
   if (!movie) notFound();
 
